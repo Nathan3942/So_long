@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:52:01 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/06 17:28:00 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:57:30 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ char	*gnl(int fd, char *buffer)
 //initialise chaque element de la t_data
 void	init_data(t_data *data, int fd, char *buffer)
 {
+	data->moves = 1;
 	data->map = ft_split(gnl(fd, buffer), '\n');
 	if (data->map == NULL)
 		return ;
 	data->pos_i = find_pi(data->map);
-	data->pos_j = find_px(data->map);
+	data->pos_j = find_pj(data->map);
 	cal_colect(data);
 	data->tb_y = 0;
 	data->tb_z = -50;
@@ -80,7 +81,7 @@ void	start_win(t_data *data)
 			data->height, "So_Long");
 	data->wall = mlx_xpm_file_to_image(data->mlx_ptr, "./img/mur.xpm",
 			&data->hei, &data->wid);
-	data->hero = mlx_xpm_file_to_image(data->mlx_ptr, "./img/torti.xpm",
+	data->hero = mlx_xpm_file_to_image(data->mlx_ptr, "./img/hero.xpm",
 			&data->hei, &data->wid);
 	data->collect = mlx_xpm_file_to_image(data->mlx_ptr, "./img/champi.xpm",
 			&data->hei, &data->wid);
@@ -99,7 +100,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (0);
-	if (test_argv(argv[1]) == 0)
+	if (test_ber(argv[1]) == 0)
 		exit_map();
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
@@ -114,8 +115,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	start_win(&data);
-
-
-
+	render(&data);
+	mlx_hook(data.win_ptr, 2, 0, key_hook, &data);
+	mlx_hook(data.win_ptr, 17, 0, exit_2, &data);
 	mlx_loop(data.mlx_ptr);
 }

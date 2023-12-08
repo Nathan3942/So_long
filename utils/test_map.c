@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_maps.c                                        :+:      :+:    :+:   */
+/*   test_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 14:29:31 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/06 15:15:38 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:45:20 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int	test_3(char **map, int j)
 			return (0);
 		i++;
 	}
+	return (1);
 }
 
 //verifie si tout les caractere pour etre sur quil sont valide

@@ -6,11 +6,11 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 13:40:30 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/06 15:29:26 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/08 15:41:25 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 //trouve la position j de depart du joueur
 int	find_pj(char **map)
@@ -61,14 +61,14 @@ void	cal_colect(t_data *data)
 	int	j;
 
 	i = 0;
-	data->collect = 0;
+	data->nbcollect = 0;
 	while (data->map[i])
 	{
 		j = 0;
 		while (data->map[i][j])
 		{
 			if (data->map[i][j] == 'C')
-				data->collect += 1;
+				data->nbcollect += 1;
 			j++;
 		}
 		i++;
@@ -94,4 +94,20 @@ int	find_c(char **map, char c)
 		i++;
 	}
 	return (0);
+}
+
+int	test_newline(char *buffer)
+{
+	int	i;
+
+	i = 0;
+	if (!buffer)
+		return (0);
+	while (buffer[i])
+	{
+		if (buffer[i] == '\n' && buffer[i + 1] == '\n')
+			return (0);
+		i++;
+	}
+	return (1);
 }

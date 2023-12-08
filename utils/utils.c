@@ -6,13 +6,13 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 10:02:10 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/06 13:40:03 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/08 17:02:17 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -39,4 +39,14 @@ void	exit_map(void)
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
+}
+
+void	ft_putnbr(int n)
+{
+	long long	k;
+
+	k = n;
+	if (k >= 10)
+		ft_putnbr(k / 10);
+	ft_putchar(k % 10 + 48);
 }

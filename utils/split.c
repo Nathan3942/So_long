@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 11:25:56 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/06 15:37:48 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/08 16:06:21 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	**ft_split(char const *str, char c)
 			return (ft_free(map));
 		k = 0;
 		while (k < len)
-			map[i][k] = *str++;
+			map[i][k++] = *str++;
 		map[i++][k] = '\0';
 	}
 	map[i] = NULL;
