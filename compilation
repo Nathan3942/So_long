@@ -1,1 +1,0 @@
-gcc -Wall -Wextra -Werror -lmlx -framework OpenGl -framework AppKit main.c
