@@ -6,14 +6,14 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 13:40:30 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/08 15:41:25 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:56:25 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
 //trouve la position j de depart du joueur
-int	find_pj(char **map)
+int	find_j(char **map, char c)
 {
 	int	i;
 	int	j;
@@ -24,7 +24,7 @@ int	find_pj(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'P')
+			if (map[i][j] == c)
 				return (j);
 			j++;
 		}
@@ -34,7 +34,7 @@ int	find_pj(char **map)
 }
 
 //trouve la position i de depart du joueur
-int	find_pi(char **map)
+int	find_i(char **map, char c)
 {
 	int	i;
 	int	j;
@@ -45,7 +45,7 @@ int	find_pi(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'P')
+			if (map[i][j] == c)
 				return (i);
 			j++;
 		}
@@ -80,20 +80,24 @@ int	find_c(char **map, char c)
 {
 	int	i;
 	int	j;
+	int	nb;
 
+	nb = 0;
 	i = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == c)
+			if (map[i][j] == c && map[i][j] == 'C')
 				return (1);
+			else if (map[i][j] == c)
+				nb++;
 			j++;
 		}
 		i++;
 	}
-	return (0);
+	return (nb);
 }
 
 int	test_newline(char *buffer)

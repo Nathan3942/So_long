@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 15:10:14 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/08 18:03:48 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:01:40 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void	map_put_photo(t_data *data)
 	if (data->map[data->tb_i][data->tb_j] == 'E')
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 			data->exit, data->tb_y, data->tb_z);
+	if (data->map[data->tb_i][data->tb_j] == '0')
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+			data->herb, data->tb_y, data->tb_z);
 }
 
 //place les element correctement par rapport a la map

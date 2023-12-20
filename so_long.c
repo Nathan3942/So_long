@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/06 09:52:01 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/08 16:57:30 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:35:15 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ char	*gnl(int fd, char *buffer)
 void	init_data(t_data *data, int fd, char *buffer)
 {
 	data->moves = 1;
-	data->map = ft_split(gnl(fd, buffer), '\n');
+	data->map = ft_split(gnl(fd, buffer), '\n', data);
 	if (data->map == NULL)
 		return ;
-	data->pos_i = find_pi(data->map);
-	data->pos_j = find_pj(data->map);
+	copymap(data);
+	data->pos_i = find_i(data->map, 'P');
+	data->pos_j = find_j(data->map, 'P');
 	cal_colect(data);
 	data->tb_y = 0;
 	data->tb_z = -50;
@@ -81,13 +82,15 @@ void	start_win(t_data *data)
 			data->height, "So_Long");
 	data->wall = mlx_xpm_file_to_image(data->mlx_ptr, "./img/mur.xpm",
 			&data->hei, &data->wid);
-	data->hero = mlx_xpm_file_to_image(data->mlx_ptr, "./img/hero.xpm",
+	data->hero = mlx_xpm_file_to_image(data->mlx_ptr, "./img/heroface.xpm",
 			&data->hei, &data->wid);
-	data->collect = mlx_xpm_file_to_image(data->mlx_ptr, "./img/champi.xpm",
+	data->collect = mlx_xpm_file_to_image(data->mlx_ptr, "./img/key.xpm",
 			&data->hei, &data->wid);
-	data->exit = mlx_xpm_file_to_image(data->mlx_ptr, "./img/exit.xpm",
+	data->exit = mlx_xpm_file_to_image(data->mlx_ptr, "./img/exit2.xpm",
 			&data->hei, &data->wid);
-	data->fond = mlx_xpm_file_to_image(data->mlx_ptr, "./img/fond.xpm",
+	data->herb = mlx_xpm_file_to_image(data->mlx_ptr, "./img/herb.xpm",
+			&data->hei, &data->wid);
+	data->fond = mlx_xpm_file_to_image(data->mlx_ptr, "./img/fond2.xpm",
 			&data->hei, &data->wid);
 }
 
@@ -98,9 +101,7 @@ int	main(int argc, char **argv)
 	int		fd;
 	char	buffer[9999];
 
-	if (argc != 2)
-		return (0);
-	if (test_ber(argv[1]) == 0)
+	if (test_ber(argv[1]) == 0 || argc != 2)
 		exit_map();
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
@@ -109,7 +110,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	init_data(&data, fd, buffer);
-	if (test_map(data.map) == 0 || test_newline(buffer) == 0)
+	if (test_map(data.map) == 0 || test_newline(buffer) == 0
+		|| chemin(&data) == 0)
 	{
 		ft_putstr("Error\nIN MAPS\n");
 		return (0);
