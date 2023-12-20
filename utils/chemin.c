@@ -6,7 +6,7 @@
 /*   By: njeanbou <njeanbou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 19:01:17 by njeanbou          #+#    #+#             */
-/*   Updated: 2023/12/20 17:59:09 by njeanbou         ###   ########.fr       */
+/*   Updated: 2023/12/20 18:07:29 by njeanbou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	chemin(t_data *data)
 
 	i = find_i(data->map, 'E');
 	j = find_j(data->map, 'E');
-	printf("limite : %d, %d", data->mapi, data->mapj);
 	res = find_chemin(i, j, data);
 	if (res == 1)
 		return (1);
